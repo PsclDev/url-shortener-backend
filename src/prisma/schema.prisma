@@ -9,3 +9,10 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Link {
+  id          String   @id
+  url         String   @unique
+  slug        String?
+  updatedAt   DateTime @default(now())
+}
