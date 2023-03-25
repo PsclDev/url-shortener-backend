@@ -8,13 +8,16 @@ import {
   Patch,
   Post,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { Link } from '@prisma/client';
 import { Response } from 'express';
 import { AppService } from './app.service';
+import { AuthGuard } from './auth/auth.guard';
 import { CreateLinkDto, UpdateLinkDto } from './link.dto';
 
 @Controller()
+@UseGuards(AuthGuard)
 export class AppController {
   private readonly logger = new Logger('AppController');
   constructor(private readonly appService: AppService) {}
