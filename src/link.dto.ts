@@ -4,7 +4,7 @@ import { z } from 'nestjs-zod/z';
 
 const CreateLinkSchema = z.object({
   url: z.string().url(),
-  slug: z.string().min(1).max(15),
+  slug: z.string().min(1).max(15).optional(),
 });
 
 export class CreateLinkDto extends createZodDto(CreateLinkSchema) {}

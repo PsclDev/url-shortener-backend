@@ -12,7 +12,7 @@ import env from '../env';
     PassportModule,
     JwtModule.register({
       secret: env.jwtSecret,
-      signOptions: { expiresIn: env.jwtExpiresIn },
+      signOptions: { expiresIn: `${env.jwtExpiresIn}h` },
     }),
   ],
   providers: [AuthService, AuthGuard, GithubStrategy],

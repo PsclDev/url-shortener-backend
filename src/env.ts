@@ -14,7 +14,8 @@ const envSchema = z.object({
   githubClientSecret: z.string(),
   githubCallbackUrl: z.string(),
   jwtSecret: z.string(),
-  jwtExpiresIn: z.string(),
+  jwtExpiresIn: z.number(),
+  frontendUrl: z.string(),
   adminId: z.string(),
   printConfiguration: z.boolean().default(false),
 });
@@ -29,7 +30,8 @@ const loadedEnvs = {
   githubClientSecret: process.env.GITHUB_CLIENT_SECRET,
   githubCallbackUrl: process.env.GITHUB_CALLBACK_URL,
   jwtSecret: process.env.JWT_SECRET,
-  jwtExpiresIn: process.env.JWT_EXPIRES_IN,
+  jwtExpiresIn: Number(process.env.JWT_EXPIRES_IN),
+  frontendUrl: process.env.FRONTEND_URL,
   adminId: process.env.ADMIN_ID,
   printConfiguration: bool(process.env.PRINT_CONFIGURATION),
 };
