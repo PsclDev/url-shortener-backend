@@ -23,7 +23,6 @@ export class AuthGuard implements CanActivate {
         secret: env.jwtSecret,
       });
 
-      console.log('decodedUser', decodedUser);
       return decodedUser.sub === env.adminId;
     } catch (err) {
       return false;

@@ -10,3 +10,6 @@ CREATE TABLE "Link" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Link_url_key" ON "Link"("url");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Link_slug_key" ON "Link"("slug");
