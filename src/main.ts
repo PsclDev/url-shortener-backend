@@ -1,6 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import env from './env';
 
@@ -10,6 +11,7 @@ async function bootstrap() {
 
   app.enableCors();
   app.setGlobalPrefix('v1');
+  app.use(cookieParser());
 
   if (env.devMode) {
     const documentBuilder = new DocumentBuilder()
