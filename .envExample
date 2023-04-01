@@ -1,0 +1,12 @@
+NODE_ENV=dev
+PORT=3010
+DATABASE_URL=postgresql://user:passwort@host:5432/db_name?schema=public
+GITHUB_CLIENT_ID=id
+GITHUB_CLIENT_SECRET=secret
+GITHUB_CALLBACK_URL=callback
+JWT_SECRET=secret
+# JWT_EXPIRES_IN expects hours
+JWT_EXPIRES_IN=48
+FRONTEND_URL=http://localhost:3000
+ADMIN_ID=id
+PRINT_CONFIGURATION=true
