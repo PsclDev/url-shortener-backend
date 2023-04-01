@@ -23,32 +23,6 @@ export class AppService {
     }
   }
 
-  async create(dto: CreateLinkDto): Promise<Link> {
-    try {
-      return await this.prisma.link.create({
-        data: {
-          id: randomBytes(2).toString('hex'),
-          url: dto.url,
-          slug: dto.slug,
-        },
-      });
-    } catch (error) {
-      if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        if (error.code === 'P2002') {
-          throw new HttpException(
-            'Link is already shortend',
-            HttpStatus.CONFLICT,
-          );
-        }
-      }
-
-      throw new HttpException(
-        'Something went wrong',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-  }
-
   async getUrl(identifier: string): Promise<string> {
     try {
       const link = await this.prisma.link.findFirst({
@@ -70,12 +44,39 @@ export class AppService {
     }
   }
 
+  async create(dto: CreateLinkDto): Promise<Link> {
+    try {
+      return await this.prisma.link.create({
+        data: {
+          id: randomBytes(2).toString('hex'),
+          url: dto.url,
+          slug: dto.slug ? encodeURIComponent(dto.slug) : null,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2002') {
+          throw new HttpException(
+            'Link is already shortend or slug is already taken',
+            HttpStatus.CONFLICT,
+          );
+        }
+      }
+
+      throw new HttpException(
+        'Something went wrong',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   async update(id: string, dto: UpdateLinkDto): Promise<Link> {
     try {
       return await this.prisma.link.update({
         where: { id },
         data: {
-          ...dto,
+          url: dto.url,
+          slug: dto.slug ? encodeURIComponent(dto.slug) : null,
         },
       });
     } catch (error) {
