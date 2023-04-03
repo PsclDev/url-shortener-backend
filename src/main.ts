@@ -2,6 +2,7 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
+import { patchNestJsSwagger } from 'nestjs-zod';
 import { AppModule } from './app.module';
 import env from './env';
 
@@ -14,6 +15,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   if (env.devMode) {
+    patchNestJsSwagger();
     const documentBuilder = new DocumentBuilder()
       .setTitle('URL Shortener backend')
       .setVersion('1.0')

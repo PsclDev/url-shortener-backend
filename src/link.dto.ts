@@ -7,5 +7,7 @@ const CreateLinkSchema = z.object({
   slug: z.string().min(1).max(15).optional(),
 });
 
+const UpdateLinkSchema = CreateLinkSchema.partial();
+
 export class CreateLinkDto extends createZodDto(CreateLinkSchema) {}
-export class UpdateLinkDto extends PartialType(CreateLinkDto) {}
+export class UpdateLinkDto extends createZodDto(UpdateLinkSchema) {}
