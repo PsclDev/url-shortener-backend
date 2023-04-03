@@ -1,6 +1,7 @@
 import { Controller, Get, Logger, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
+import { URL } from 'url';
 import env from '../env';
 import { AuthService } from './auth.service';
 
@@ -28,6 +29,7 @@ export class AuthController {
       'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0',
     );
     res.cookie('token', token, {
+      domain: new URL(env.frontendUrl).hostname,
       httpOnly: true,
       expires: new Date(Date.now() + env.jwtExpiresIn * 60 * 60 * 1000),
     });
