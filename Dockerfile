@@ -5,7 +5,7 @@ RUN npm install -g pnpm@7.30.1
 
 FROM base As development
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json pnpm-lock.yaml ./
 
@@ -16,11 +16,11 @@ COPY . .
 
 FROM base As build
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
-COPY --from=development /usr/src/app/node_modules ./node_modules
+COPY --from=development /app/node_modules ./node_modules
 
 COPY . .
 
@@ -32,8 +32,11 @@ RUN pnpm prune --prod
 FROM node:18-alpine As production
 
 ENV NODE_ENV production
+RUN npm install -g prisma@4.11.0
 
-COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /app/package*.json ./
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
+COPY prisma ./prisma/
 
-CMD [ "node", "dist/main.js" ]
+CMD [  "npm", "run", "start:migrate:prod" ]
