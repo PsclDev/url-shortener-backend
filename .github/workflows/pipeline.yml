@@ -1,0 +1,32 @@
+name: pipeline
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to registry 🔐
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.ACTOR }}
+          password: ${{ secrets.PIPELINE_PAT }}
+
+      - name: Build and push image 🚀
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: './'
+          file: './Dockerfile'
+          tags: ghcr.io/pscldev/url-shortener-backend:latest,ghcr.io/pscldev/url-shortener-backend:${{  github.ref_name }}
