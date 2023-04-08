@@ -22,13 +22,13 @@ export class AppController {
   private readonly logger = new Logger('AppController');
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Get('links')
   async getAll(): Promise<Link[]> {
     this.logger.log('Getting all links');
     return await this.appService.getAll();
   }
 
-  @Get('redirect/:identifier')
+  @Get('link/redirect/:identifier')
   async redirect(
     @Param('identifier') identifier: string,
     @Res() res: Response,
@@ -43,13 +43,13 @@ export class AppController {
     res.redirect(301, url);
   }
 
-  @Post()
+  @Post('link')
   async create(@Body() dto: CreateLinkDto): Promise<Link> {
     this.logger.log(`Creating link for ${dto.url}`);
     return await this.appService.create(dto);
   }
 
-  @Patch(':id')
+  @Patch('link/:id')
   async update(
     @Param('id') id: string,
     @Body() dto: UpdateLinkDto,
@@ -58,7 +58,7 @@ export class AppController {
     return await this.appService.update(id, dto);
   }
 
-  @Delete(':id')
+  @Delete('link/:id')
   async delete(@Param('id') id: string): Promise<Link> {
     this.logger.log(`Deleting link ${id}`);
     return await this.appService.delete(id);
