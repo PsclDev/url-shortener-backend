@@ -15,6 +15,7 @@ import { Response } from 'express';
 import { AppService } from './app.service';
 import { AuthGuard } from './auth/auth.guard';
 import { CreateLinkDto, UpdateLinkDto } from './link.dto';
+import { Public } from './public.decorator';
 
 @Controller()
 @UseGuards(AuthGuard)
@@ -29,6 +30,7 @@ export class AppController {
   }
 
   @Get('link/redirect/:identifier')
+  @Public()
   async redirect(
     @Param('identifier') identifier: string,
     @Res() res: Response,
