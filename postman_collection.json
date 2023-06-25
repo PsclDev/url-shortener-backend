@@ -7,16 +7,34 @@
 	},
 	"item": [
 		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get All",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/links",
+					"raw": "{{base_url}}/v1/links",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"v1",
 						"links"
 					]
 				}
@@ -29,11 +47,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/link/redirect/{{last_slug}}",
+					"raw": "{{base_url}}/v1/link/redirect/{{last_slug}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"v1",
 						"link",
 						"redirect",
 						"{{last_slug}}"
@@ -48,11 +67,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/link/redirect/{{last_id}}",
+					"raw": "{{base_url}}/v1/link/redirect/{{last_id}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"v1",
 						"link",
 						"redirect",
 						"{{last_id}}"
@@ -89,11 +109,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/link",
+					"raw": "{{base_url}}/v1/link",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"v1",
 						"link"
 					]
 				}
@@ -127,11 +148,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/link/{{last_id}}",
+					"raw": "{{base_url}}/v1/link/{{last_id}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"v1",
 						"link",
 						"{{last_id}}"
 					]
@@ -165,11 +187,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/link/{{last_id}}",
+					"raw": "{{base_url}}/v1/link/{{last_id}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"v1",
 						"link",
 						"{{last_id}}"
 					]

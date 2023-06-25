@@ -18,13 +18,16 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/axios": "^3.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^10.0.2",
     "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.3.0",
+    "@nestjs/terminus": "^10.0.1",
     "@prisma/client": "^4.11.0",
+    "axios": "^1.4.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "dotenv-expand": "^10.0.0",
